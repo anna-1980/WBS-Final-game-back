@@ -1,14 +1,18 @@
 import mongoose from 'mongoose';
 
+const url = process.env.MDB_URI;
+console.log(process.env.MDB_URI);
+
 try {
     const client = await mongoose.connect(
-        'mongodb+srv://Anna:aniagopi@cluster0.iyit3.mongodb.net/myGames?retryWrites=true&w=majority'
-    );
-    console.log(`Connected to MongoDB ${client.connection.host}`);
-} catch (error) {
-    console.log(error);
-}
-
+        url
+        );
+        console.log(`Connected to MongoDB ${client.connection.host}`);
+    } catch (error) {
+        console.log(error);
+    }
+    
+    // console.log(url);
 
 
 
