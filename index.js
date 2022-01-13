@@ -1,4 +1,5 @@
 import 'dotenv/config.js';
+import './db/mongoose.js'
 import express from 'express';
 import postsRouter from './routes/postsRouter.js';
 import errorHandler from './middlewares/errorHandler.js';
