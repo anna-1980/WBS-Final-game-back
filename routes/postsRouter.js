@@ -3,7 +3,7 @@ import { createPost, deletePost, getAllPosts, getSinglePost, updatePost } from '
 
 const postsRouter = Router();
 
-postsRouter.route('/c').get(getAllPosts).post(createPost);
+postsRouter.route('/').get(getAllPosts).post(createPost);
 
 postsRouter.route('/:id').get(getSinglePost).put(updatePost).delete(deletePost);
 

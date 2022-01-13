@@ -12,5 +12,5 @@ const gameschema = new Schema ({
 
 // const NewGame = model('Game', gameschema);
 
-export default model('Game', gameschema);
+export default model('Post', gameschema);
 
