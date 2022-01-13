@@ -2,7 +2,10 @@ import asyncHandler from '../middlewares/asyncHandler.js';
 import Game from '../models/NewGame.js';
 // import Post from '../models/Post.js'
 
-export const getAllPosts = asyncHandler(async (req, res, next) => res.send('GET all'));
+export const getAllPosts = asyncHandler(async (req, res, next) => {
+    const games = await Game.find();
+    res.json(games);
+});
 
 export const createPost = asyncHandler(async (req, res) => {
     const newGame = await Game.create({
