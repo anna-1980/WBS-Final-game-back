@@ -6,9 +6,9 @@ export const getAllPosts = asyncHandler(async (req, res, next) => res.send('GET 
 
 export const createPost = asyncHandler(async (req, res) => {
     const newGame = await Game.create({
-        title: 'Virus Invaders', 
+        title: 'Again', 
         url: 'https://angry-viruses.netlify.app', 
-        author: "AnnaMaria", 
+        author: "Someone Else", 
     });
     res.status(201).json(newGame);
 });
