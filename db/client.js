@@ -1,6 +1,6 @@
 import { MongoClient, MongoCLient } from 'mongodb';
 
-const url = prosecc.evn.MONGO_URI;
+const url = prosess.evn.MONGO_URI;
 const client = new MongoClient(url);
 
 //DB name
