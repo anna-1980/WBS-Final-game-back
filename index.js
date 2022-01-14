@@ -3,8 +3,11 @@ import './db/mongoose.js'
 import express from 'express';
 import gamesRouter from './routes/gameRouter.js';
 import errorHandler from './middlewares/errorHandler.js';
+import cors from 'cors';
+
 
 const app = express();
+app.use(cors());
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
