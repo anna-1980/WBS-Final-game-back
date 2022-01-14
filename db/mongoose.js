@@ -25,7 +25,6 @@ try {
 // import mongoose from "mongoose";
 
 
-// mongoose.connect('mongodb+srv://Anna:aniagopi@cluster0.iyit3.mongodb.net/myGames?retryWrites=true&w=majority');
 
 // const Game = mongoose.model('Games', {
 //     title: String, 
