@@ -38,7 +38,7 @@ export const createGame = asyncHandler(async (req, res) => {
   // Save game in database
   const newGame = await Game.create({
     title: "FINAL COUNTDOWN",
-    url: "https://angry-viruses.netlify.app",
+    url: url,
     author: "By ME ",
   });
   res.status(201).json(newGame);
