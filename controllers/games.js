@@ -3,6 +3,8 @@ import Game from "../models/NewGame.js";
 import ErrorResponse from "../utils/ErrorResponse.js";
 import axios from "axios";
 import fs from "fs";
+import path from 'path'
+import slugify from "slugify";
 // import Post from '../models/Post.js'
 
 export const getAllGames = asyncHandler(async (req, res, next) => {
@@ -13,21 +15,23 @@ export const getAllGames = asyncHandler(async (req, res, next) => {
 });
 
 export const createGame = asyncHandler(async (req, res) => {
-  //
+  // Get the file from request
+  const {
+    body: { title },
+    file: { buffer, originalname },
+  } = req;
   // Create new Netlify site
   const {
     data: { site_id, url },
   } = await axios.post(
     `https://api.netlify.com/api/v1/sites`,
-    { name: `test-${Date.now()}` },
+    { name: `${slugify(title)}-${Date.now()}` },
     { headers: { Authorization: `Bearer ${process.env.N_TOKEN}` } }
   );
-  console.log(site_id);
-  const zipContents = fs.readFileSync("./test/VirusInvaders.zip");
   // Trigger deploy for newly create site
   const deploy = await axios.post(
     `https://api.netlify.com/api/v1/sites/${site_id}/deploys`,
-    zipContents,
+    buffer,
     {
       headers: {
         Authorization: `Bearer ${process.env.N_TOKEN}`,
@@ -37,8 +41,8 @@ export const createGame = asyncHandler(async (req, res) => {
   );
   // Save game in database
   const newGame = await Game.create({
-    title: "FINAL COUNTDOWN",
-    url: url,
+    title,
+    url: `${url}/${path.parse(originalname).name}`,
     author: "By ME ",
   });
   res.status(201).json(newGame);
