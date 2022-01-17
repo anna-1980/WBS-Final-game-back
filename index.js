@@ -12,7 +12,7 @@ const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use("/api/games/", gamesRouter);
-app.use("/api/scores/", scoreRouter);
+app.use("/api/scores/", scoreRouter); //for the scores
 app.use("*", (req, res) => res.send("Blog API"));
 app.use(errorHandler);
 
