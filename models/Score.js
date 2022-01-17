@@ -11,3 +11,4 @@ const scoreModel = new Schema ({
 
 export default model('Score', scoreModel);
 
+//adding new Schema

@@ -13,3 +13,6 @@ export const getScoresByGame = asyncHandler(async (req, res, next) => {
   const scores = await Score.find({game: req.params.name});
   res.json(scores);
 });
+
+
+//here creating functionality for pulling the game score
