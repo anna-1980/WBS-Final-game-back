@@ -22,7 +22,7 @@ export const createGame = asyncHandler(async (req, res) => {
   } = req;
   // Create new Netlify site
   const {
-    data: { site_id, url },
+    data: { site_id, ssl_url }
   } = await axios.post(
     `https://api.netlify.com/api/v1/sites`,
     { name: `${slugify(title)}-${Date.now()}` },
@@ -42,7 +42,7 @@ export const createGame = asyncHandler(async (req, res) => {
   // Save game in database
   const newGame = await Game.create({
     title,
-    url: `${url}/${path.parse(originalname).name}`,
+    url: `${ssl_url}/${path.parse(originalname).name}`,
     author: "By ME ",
   });
   res.status(201).json(newGame);
