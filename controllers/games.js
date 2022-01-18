@@ -17,7 +17,7 @@ export const getAllGames = asyncHandler(async (req, res, next) => {
 export const createGame = asyncHandler(async (req, res) => {
   // Get the file from request
   const {
-    body: { title },
+    body: { title, author },
     file: { buffer, originalname },
   } = req;
   // Create new Netlify site
@@ -43,7 +43,7 @@ export const createGame = asyncHandler(async (req, res) => {
   const newGame = await Game.create({
     title,
     url: `${ssl_url}/${path.parse(originalname).name}`,
-    author: "By ME ",
+    author,
   });
   res.status(201).json(newGame);
 });
