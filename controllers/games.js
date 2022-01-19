@@ -3,7 +3,7 @@ import Game from "../models/NewGame.js";
 import ErrorResponse from "../utils/ErrorResponse.js";
 import axios from "axios";
 import fs from "fs";
-import path from 'path'
+import path from "path";
 import slugify from "slugify";
 // import Post from '../models/Post.js'
 
@@ -22,11 +22,15 @@ export const createGame = asyncHandler(async (req, res) => {
   } = req;
   // Create new Netlify site
   const {
-    data: { site_id, ssl_url }
+    data: { site_id, ssl_url },
   } = await axios.post(
     `https://api.netlify.com/api/v1/sites`,
     { name: `${slugify(title)}-${Date.now()}` },
-    { headers: { Authorization: `Bearer ${process.env.N_TOKEN}` } }
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.N_TOKEN}`,
+      },
+    }
   );
   // Trigger deploy for newly create site
   const deploy = await axios.post(
@@ -37,12 +41,14 @@ export const createGame = asyncHandler(async (req, res) => {
         Authorization: `Bearer ${process.env.N_TOKEN}`,
         "Content-Type": "application/zip",
       },
+      maxContentLength: Infinity,
+      maxBodyLength: Infinity,
     }
   );
   // Save game in database
   const newGame = await Game.create({
     title,
-    url: `${ssl_url}/${path.parse(originalname).name}`,
+    url: `${ssl_url}`,
     author,
   });
   res.status(201).json(newGame);
