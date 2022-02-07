@@ -16,7 +16,7 @@ export const getAllScores = asyncHandler(async (req, res, next) => {
  
 
 export const getScoresByGame = asyncHandler(async (req, res, next) => {
-  const scores = await Score.find({game: req.params.name}).sort({score: -1});
+  const scores = await Score.find({game: req.params.name}).sort({score: -1}).limit(15);
   res.json(scores);
 });
 
