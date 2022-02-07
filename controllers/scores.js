@@ -16,7 +16,7 @@ export const getAllScores = asyncHandler(async (req, res, next) => {
  
 
 export const getScoresByGame = asyncHandler(async (req, res, next) => {
-  const scores = await Score.find({game: req.params.name});
+  const scores = await Score.find({game: req.params.name}).sort({score: -1});git
   res.json(scores);
 });
 
